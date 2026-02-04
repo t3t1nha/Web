@@ -15,6 +15,11 @@ app.use(express.json());
 // Serve static files
 app.use(express.static(__dirname));
 
+// Serve index.html for root path
+app.get('/', (req, res) => {
+  res.sendFile(__dirname + '/index.html');
+});
+
 // Add the version: "v1" here!
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
