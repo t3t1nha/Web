@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini AI Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+
+<div class="main-container">
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h2>Chats</h2>
+            <div class="sidebar-buttons">
+                <button id="settingsBtn" title="Settings">⚙️</button>
+                <button id="newChatBtn" title="New chat">+</button>
+            </div>
+        </div>
+        
+        <input type="text" id="chatSearch" placeholder="Search chats..." class="chat-search">
+        
+        <div class="chat-list" id="chatList">
+            <p class="no-chats">No chats yet</p>
+        </div>
+        
+        <div class="sidebar-footer">
+            <button id="clearAllChats" title="Delete all chats" class="clear-btn">Clear All</button>
+        </div>
+    </div>
+
+    <div class="chat-container">
+        <div class="chat-header">
+            <div class="header-content">
+                <h1>Gemini Assistant</h1>
+                <div class="user-info" id="userInfo"></div>
+                <div class="header-actions">
+                    <button id="exportBtn" title="Export chat">Export</button>
+                    <button id="helpBtn" title="Keyboard shortcuts">Help</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="messages-container" id="messagesContainer">
+            <div class="welcome-message">
+                <p>Hello! I'm your AI Assistant. Ask me anything!</p>
+            </div>
+        </div>
+
+        <div class="input-area">
+            <div class="input-wrapper">
+                <input type="text" id="promptInput" placeholder="Type your message..." autocomplete="off">
+                <div class="char-counter" id="charCounter">0/2000</div>
+            </div>
+            <button id="sendBtn" title="Send (Enter)">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="22" y1="2" x2="11" y2="13"></line>
+                    <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+                </svg>
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- Settings Modal -->
+<div class="modal" id="settingsModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Settings</h2>
+            <button class="modal-close" onclick="closeModal('settingsModal')">X</button>
+        </div>
+        <div class="modal-body">
+            <div class="setting-item">
+                <label>Theme</label>
+                <div class="theme-toggle">
+                    <button class="theme-btn" id="darkThemeBtn" data-theme="dark">Dark</button>
+                    <button class="theme-btn" id="lightThemeBtn" data-theme="light">Light</button>
+                </div>
+            </div>
+            <div class="setting-item">
+                <label>Auto-save drafts</label>
+                <input type="checkbox" id="autoSaveToggle" checked>
+            </div>
+            <div class="setting-item">
+                <label>Show timestamps</label>
+                <input type="checkbox" id="timestampToggle">
+            </div>
+            <div class="setting-item">
+                <label>Auto-scroll on new message</label>
+                <input type="checkbox" id="autoScrollToggle" checked>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Keyboard Shortcuts Modal -->
+<div class="modal" id="helpModal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2>Keyboard Shortcuts</h2>
+            <button class="modal-close" onclick="closeModal('helpModal')">X</button>
+        </div>
+        <div class="modal-body shortcuts-list">
+            <div class="shortcut-item">
+                <div class="shortcut-key">Enter</div>
+                <div class="shortcut-desc">Send message</div>
+            </div>
+            <div class="shortcut-item">
+                <div class="shortcut-key">Ctrl + L</div>
+                <div class="shortcut-desc">Focus input</div>
+            </div>
+            <div class="shortcut-item">
+                <div class="shortcut-key">Ctrl + K</div>
+                <div class="shortcut-desc">New chat</div>
+            </div>
+            <div class="shortcut-item">
+                <div class="shortcut-key">Ctrl + S</div>
+                <div class="shortcut-desc">Search chats</div>
+            </div>
+            <div class="shortcut-item">
+                <div class="shortcut-key">?</div>
+                <div class="shortcut-desc">Toggle help</div>
+            </div>
+            <hr style="border: none; border-top: 1px solid #333; margin: 15px 0;">
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Overlay -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeAllModals()"></div>
+
+<script src="script.js"></script>
+</body>
+</html>
